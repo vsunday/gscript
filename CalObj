@@ -1,0 +1,29 @@
+function CalObj() {
+  this.id = "";
+  this.title = "";
+  this.startDate = "";
+  this.endDate = "";
+  this.summary = "";
+  this.url = "";
+  this.location = "";
+}
+
+CalObj.prototype.init = function(data) {
+  this.id = data[0];  
+  this.title = data[1];
+  this.startDate = data[2];
+  this.endDate = data[3];
+  this.summary = data[4];
+  this.url = data[5];
+  this.location = data[6];
+}
+
+CalObj.prototype.loadFromCalendarEvent = function(calEvent) {
+  this.id = calEvent.getId() || this.id || "";
+  this.title = calEvent.getTitle() || this.title || "";
+  this.startDate = calEvent.getStartTime() || this.startDate || "";
+  this.endDate = calEvent.getEndTime().addDate(-1) || this.endDate || "";
+  this.summary = calEvent.getDescription() || this.summary || "";
+  this.url = this.url || "";
+  this.location = calEvent.getLocation() || this.location || "";
+}
